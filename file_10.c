@@ -13,6 +13,10 @@ int main() {
     
  
 
-    printf("%d\n", *ssilka_na_rez);
-    printf("%p", ssilka_na_rez);
+    printf("Результат в адресе памяти%d\n", *ssilka_na_rez);
+    printf("Сам адрес в памяти(его номер):%p\n", ssilka_na_rez);
+
+    *ssilka_na_rez = 500;
+
+    printf("Значение rez после изменения через указатель: %d\n", rez);
 }
