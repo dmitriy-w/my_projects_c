@@ -38,7 +38,7 @@ int main() {
     xor_cipher(data, my_key, len);
 
     printf("\n\nАдрес в памяти - %p, Ваша преобразованная строка: \n", data);
-    for (int i = 0; data[i] != '\0'; i++) {
+    for (int i = 0; i < len; i++) {
         putchar(data[i]);
     }
 
