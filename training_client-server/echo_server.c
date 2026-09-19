@@ -23,8 +23,8 @@ int main() {
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY); //32-разрядный адрес ipv4
     servaddr.sin_port = htons(4444); //16-разрядный номер порта ТСР
 
-    bind(listenfd, (const struct sockaddr *) &servaddr, sizeof(servaddr));
-    if ( < 0) {
+    int bind_status = bind(listenfd, (const struct sockaddr *) &servaddr, sizeof(servaddr));
+    if (bind_status < 0) {
         perror("Ошибка в bind");
         exit(1);
     }
