@@ -29,5 +29,23 @@ int main() {
         exit(1);
     }
 
+    int listen_status = listen(listenfd, 10);
+    if (listen_status < 0) {
+        perror("Ошибка в функции listen");
+        exit(1);
+    }
+
+    clilen = sizeof(cliaddr);
+    connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &clilen);
+    if (connfd < 0) {
+        perror("Ошибка в accept");
+        exit(1);
+    }
+
+    printf("подключение клиента прошло успешно\n");
+
+    close(connfd); //выключаем присоединенного клиента
+    close(listenfd); //вывключаем сам прослушиваюший сокет
+
     return 0;
 }
