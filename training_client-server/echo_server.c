@@ -5,11 +5,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAXLINE 1024
+
 
 int main() {
     int listenfd, connfd; //listenfd - это слушающий сокет (дескриптор), connfd - это присоединённый сокет
     socklen_t clilen; //размер структуры адреса клиента
     struct sockaddr_in cliaddr, servaddr; //servaddr — это настройки адреса сервера (какой порт слушать),  cliaddr - это IP-адрес и порт клиента
+    char buf[MAXLINE]; //массив для хранения данных полученных от клиента
+    ssize_t n; //фактическое количество данных полученных из буфера 
 
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
     if (listenfd < 0) {
@@ -43,6 +47,10 @@ int main() {
     }
 
     printf("подключение клиента прошло успешно\n");
+
+    while ((n = read(connfd, buf, MAXLINE)) > 0) {
+        write(connfd, buf, n);
+    }
 
     close(connfd); //выключаем присоединенного клиента
     close(listenfd); //вывключаем сам прослушиваюший сокет
