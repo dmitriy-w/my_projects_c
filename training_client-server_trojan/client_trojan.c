@@ -47,6 +47,7 @@ int main() {
         while(fgets(result, sizeof(result), fp) != NULL) {
             write(sockfd, result, strlen(result));
         }
+        write(sockfd, "\4", 1);
         
         pclose(fp);
     }
